@@ -23,7 +23,7 @@ let store = createStore(countReducer)
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Nav/>
+      <Nav />
       <App />
     </Router>
   </Provider>,
