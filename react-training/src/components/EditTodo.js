@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {editTodo} from '../actions'
+import { editTodo } from '../actions'
 import { Input } from 'antd';
 
 
-const EditTodo = ({id,content, editTodo}) => {
+const EditTodo = ({ id, content, editTodo }) => {
     return (
-        <Input 
+        <Input
             className='form-control'
-            type='text' 
+            type='text'
             // onMouseOut={}
             onKeyDown={e => {
-                if(e.keyCode === 13){
-                    editTodo({id, content: e.target.value})
+                if (e.keyCode === 13) {
+                    editTodo({ id, content: e.target.value })
                 }
             }}
             defaultValue={content}
@@ -24,7 +24,7 @@ const EditTodo = ({id,content, editTodo}) => {
 
 const mapDispatch2Props = (dispatch) => {
     return {
-        editTodo : (data) => dispatch(editTodo(data))
+        editTodo: (data) => dispatch(editTodo(data))
     }
 }
 export default connect(null, mapDispatch2Props)(EditTodo)
