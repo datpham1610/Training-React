@@ -2,7 +2,6 @@ import "antd/dist/antd.css";
 import React from 'react'
 import { AuthButton } from '../components/AuthButton'
 import CustomLink from './CustomLink'
-import { Link } from 'react-router-dom'
 
 export default class Nav extends React.Component {
     render() {
@@ -12,9 +11,8 @@ export default class Nav extends React.Component {
                     <ul className="list-inline">
                         <CustomLink activeOnlyeExact={true} to="/" label="Home"></CustomLink>
                         <CustomLink to="/todos" label="Todo List"></CustomLink>
-                        <li className="list-inline-item">
-                            <Link to="/About">About</Link>
-                        </li>
+                        <CustomLink to="/about" label="About"></CustomLink>
+                        <CustomLink to="/posts" label="New Posts"></CustomLink>
                         <li className="list-inline-item">
                             <AuthButton />
                         </li>

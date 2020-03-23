@@ -8,6 +8,7 @@ import "antd/dist/antd.css";
 import { Switch, Route, useLocation } from 'react-router-dom'
 import Home from './containers/Home'
 import { PrivateRoute, Login } from './components/AuthButton'
+import News from './containers/News'
 
 const NotFound404 = () => {
   const location = useLocation();
@@ -49,6 +50,9 @@ const App = () => (
         </Col>
       </Row>
     </PrivateRoute>
+    <Route path="/posts">
+      <News/>
+    </Route>
     <Route path="*"><NotFound404 /></Route>
   </Switch>
 )
