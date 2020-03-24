@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Prompt
-} from "react-router-dom";
-import { DatePicker, Form, Input, Button, Col } from 'antd';
+import { Prompt } from "react-router-dom";
+import { DatePicker, Form, Input, Button } from 'antd';
 
 
 const BlockingForm = (props) => {
     const formRef = React.createRef()
     let [isBlocking, setIsBlocking] = useState(false);
+    console.log(<Prompt when={isBlocking} message = {location => `Are you sure you want go to ${location.pathname.replace('/','')}`} />)
     return (
         <Form className="form-custom"
             onFinish={(values) => {
@@ -23,6 +18,7 @@ const BlockingForm = (props) => {
             name="control-ref"
             layout="inline"
         >
+            <Prompt when={isBlocking} message = {location => `Are you sure you want go to ${location.pathname.replace('/','')}`} />
             <Form.Item
                 name='content'
                 rules={[
@@ -32,13 +28,12 @@ const BlockingForm = (props) => {
                     },
                 ]}
             >
-                <Prompt when={isBlocking} message = {location => `Are you sure you want go to ${location.pathname.replace('/','')}`} />
-                    <Input
-                        className=" form-control"
-                        placeholder="Enter a task..."
-                        type="text"
-                        onChange = {e => setIsBlocking(e.target.value.length > 0)}
-                    />
+                <Input
+                    className=" form-control"
+                    placeholder="Enter a task..."
+                    type="text"
+                    onChange = {e => setIsBlocking(e.target.value.length > 0)}
+                />
             </Form.Item>
             <Form.Item
                 name="deadline"

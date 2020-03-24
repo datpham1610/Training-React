@@ -35,7 +35,7 @@ export const Login = () => {
     )
 }
 
-export const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ children, ...rest }) => {
     return (
         <Route
             {...rest}
@@ -66,3 +66,6 @@ export const AuthButton = () => {
             null
         )
 }
+
+
+export default PrivateRoute

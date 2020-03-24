@@ -1,14 +1,17 @@
-import React from 'react'
-import AddTodo from './containers/AddTodo'
-import Filter from './containers/Filter'
-import TodoList from './components/TodoList'
-import DateTime from './components/Date'
+import React, {lazy, Suspense} from 'react'
 import { Row, Col } from 'antd';
 import "antd/dist/antd.css";
 import { Switch, Route, useLocation } from 'react-router-dom'
-import Home from './containers/Home'
-import { PrivateRoute, Login } from './components/AuthButton'
-import News from './containers/News'
+
+
+const Home = lazy(() => import('./containers/Home'))
+const PrivateRoute = lazy(() => import('./components/AuthButton'))
+const Login = lazy(() => import(('./components/ReExport')))
+const News = lazy(() => import('./containers/News'))
+const AddTodo = lazy(() => import('./containers/AddTodo'))
+const Filter = lazy(()=>import('./containers/Filter'))
+const TodoList = lazy(()=>import('./components/TodoList')) 
+const DateTime = lazy(()=>import('./components/Date')) 
 
 const NotFound404 = () => {
   const location = useLocation();
@@ -18,43 +21,45 @@ const NotFound404 = () => {
 }
 
 const App = () => (
-  <Switch>
-    <Route exact path="/"><Home /></Route>
-    <Route path="/login"><Login /></Route>
-    <PrivateRoute path="/todos">
-      <Row>
-        <Col span={24}>
-          <div className='d-md-flex d-flex flex-column justify-content-center custom-bg'>
-            <Row>
+  <Suspense fallback={<div>Loading....</div>}>
+    <Switch>
+      <Route exact path="/"><Home /></Route>
+      <Route path="/login"><Login /></Route>
+      <PrivateRoute path="/todos">
+        <Row>
+          <Col span={24}>
+            <div className='d-md-flex d-flex flex-column justify-content-center custom-bg'>
+              <Row>
 
-              <Col span={20} offset={2} className='bg-black'>
-                <Row>
-                  <Col lg={{ span: 14 }} md={{ span: 12 }}>
-                    <div className="heading-left text-md-left text-center">
-                      <DateTime />
-                    </div>
-                  </Col>
-                  <Col lg={{ span: 10 }} md={{ span: 12 }}>
-                    <Filter />
-                  </Col>
-                </Row>
-                <Row className="row">
-                  <AddTodo />
-                  <Col lg={{ span: 10 }}></Col>
-                  <TodoList />
-                </Row>
-              </Col>
+                <Col span={20} offset={2} className='bg-black'>
+                  <Row>
+                    <Col lg={{ span: 14 }} md={{ span: 12 }}>
+                      <div className="heading-left text-md-left text-center">
+                        <DateTime />
+                      </div>
+                    </Col>
+                    <Col lg={{ span: 10 }} md={{ span: 12 }}>
+                      <Filter />
+                    </Col>
+                  </Row>
+                  <Row className="row">
+                    <AddTodo />
+                    <Col lg={{ span: 10 }}></Col>
+                    <TodoList />
+                  </Row>
+                </Col>
 
-            </Row>
-          </div>
-        </Col>
-      </Row>
-    </PrivateRoute>
-    <Route path="/posts">
-      <News/>
-    </Route>
-    <Route path="*"><NotFound404 /></Route>
-  </Switch>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </PrivateRoute>
+      <Route path="/posts">
+        <News/>
+      </Route>
+      <Route path="*"><NotFound404 /></Route>
+    </Switch>
+  </Suspense>
 )
 
 export default App
