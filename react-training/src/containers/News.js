@@ -1,12 +1,14 @@
-import React from "react";
+import React,{lazy,Suspense} from "react";
 import {BrowserRouter as Router} from "react-router-dom";
-import ShowPost from '../components/ShowPost'
 
+const ShowPost = lazy(() => import('../components/ShowPost'))
 const QueryPosts = () =>{
     return (
-        <Router>
-            <ShowPost/>
-        </Router>
+        <Suspense fallback={<div>Wait minutes....</div>}>
+            <Router>
+                <ShowPost/>
+            </Router>
+        </Suspense>
     )
 }
 
