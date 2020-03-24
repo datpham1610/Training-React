@@ -5,7 +5,7 @@ import TodoList from './components/TodoList'
 import DateTime from './components/Date'
 import { Row, Col } from 'antd';
 import "antd/dist/antd.css";
-import { Switch, Route, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 import Home from './containers/Home'
 import { PrivateRoute, Login } from './components/AuthButton'
 import News from './containers/News'
@@ -22,12 +22,17 @@ const NotFound404 = () => {
 const App = () => {
   let location = useLocation()
   let popup = location.state && location.state.popup
+  let history = useHistory()
+  const back = () =>{
+    history.goBack();
+  }
   return(
     <Switch location={popup || location}>
       {popup ? 
         <Route exact path="/">
           <Home />
           <div
+            onClick = {back}
             style={{
             position: "absolute",
             background: "#E6E6FA	",
