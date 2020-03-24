@@ -23,6 +23,7 @@ const BlockingForm = (props) => {
             name="control-ref"
             layout="inline"
         >
+            <Prompt when={isBlocking} message = {location => `Are you sure you want go to ${location.pathname.replace('/','')}`} />
             <Form.Item
                 name='content'
                 rules={[
@@ -32,13 +33,13 @@ const BlockingForm = (props) => {
                     },
                 ]}
             >
-                <Prompt when={isBlocking} message = {location => `Are you sure you want go to ${location.pathname.replace('/','')}`} />
-                    <Input
-                        className=" form-control"
-                        placeholder="Enter a task..."
-                        type="text"
-                        onChange = {e => setIsBlocking(e.target.value.length > 0)}
-                    />
+                
+                <Input
+                    className=" form-control"
+                    placeholder="Enter a task..."
+                    type="text"
+                    onChange = {e => setIsBlocking(e.target.value.length > 0)}
+                />
             </Form.Item>
             <Form.Item
                 name="deadline"

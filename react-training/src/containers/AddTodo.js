@@ -5,9 +5,6 @@ import { DatePicker, Form, Input, Button, Col } from 'antd';
 import "antd/dist/antd.css";
 import BlockingForm from '../components/BlockingForm'
 
-// const onFinish = (values,props) => {
-//   props.addTodo(values.content,values.deadline.format("MM/DD/Y"))
-// };
 
 const AddTodo = () => {
     return (
