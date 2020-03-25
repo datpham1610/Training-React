@@ -9,6 +9,7 @@ import { Switch, Route, useLocation, useHistory } from 'react-router-dom'
 import Home from './containers/Home'
 import { PrivateRoute, Login } from './components/AuthButton'
 import News from './containers/News'
+import RandomText from './components/RandomText'
 
 
 
@@ -24,26 +25,28 @@ const App = () => {
   let popup = location.state && location.state.popup
   let history = useHistory()
   const back = () =>{
+    document.body.style.overflow = 'unset'
     history.goBack();
   }
   return(
     <Switch location={popup || location}>
       {popup ? 
-        <Route exact path="/">
+        <Route>
           <Home />
           <div
             onClick = {back}
             style={{
-            position: "absolute",
+            position: "fixed",
             background: "#E6E6FA	",
             top: '50%',
-            left: "50%",
             padding: 15,
-            width:"80vw",
+            width:"100%",
             height:'50vh',
-            transform:'translate(-50%,-50%)',
+            transform:'translateY(-50%)',
+            overflow:'scroll',
             }}
           >
+            <RandomText/>
           </div>
         </Route> 
       :

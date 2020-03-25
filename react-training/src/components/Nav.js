@@ -23,6 +23,7 @@ export default function Nav() {
                                     pathname:'/popup',
                                     state:{popup:location}
                                 }}
+                                onClick = {()=>{document.body.style.overflow='hidden'}}
                                 >
                                 Popup Images
                             </Link>
