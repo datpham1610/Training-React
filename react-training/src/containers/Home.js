@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import Loadable from 'react-loadable'
-// import LoadableRandomText from '../components/RandomText'
 
 
 const LoadableRandomText = Loadable({

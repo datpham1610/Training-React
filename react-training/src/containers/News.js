@@ -1,14 +1,21 @@
-import React,{lazy,Suspense} from "react";
+import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
+import Loadable from 'react-loadable'
 
-const ShowPost = lazy(() => import('../components/ShowPost'))
+const LoadablePost = Loadable({
+    loader(){
+        return import('../components/ShowPost')
+    },
+    loading(){
+        return <div></div>
+    }
+})
+
 const QueryPosts = () =>{
     return (
-        <Suspense fallback={<div>Wait minutes....</div>}>
             <Router>
-                <ShowPost/>
+                <LoadablePost/>
             </Router>
-        </Suspense>
     )
 }
 
