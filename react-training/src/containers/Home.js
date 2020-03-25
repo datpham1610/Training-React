@@ -1,16 +1,6 @@
-import React,{useState} from 'react'
-import Loadable from 'react-loadable'
-// import LoadableRandomText from '../components/RandomText'
+import React,{useState,lazy, Suspense} from 'react'
 
-
-const LoadableRandomText = Loadable({
-  loader(){
-    return import('../components/RandomText');
-  },
-  loading(){
-    return <div>Loading...</div>
-  }
-})
+const RandomText = lazy(()=>import('../components/RandomText'))
 
 export default function Home(){
   const [isRdandomtext, setIsRandomText] = useState(false)
@@ -18,10 +8,12 @@ export default function Home(){
     setIsRandomText(!isRdandomtext)
   }
   return(
-    <div>
-      <div>Hello World!</div>
-      <button onClick={TooggleRandomText}>Toggle Random Text</button>
-      {isRdandomtext ? <LoadableRandomText/> : ''}
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <div>Hello World!</div>
+        <button onClick={TooggleRandomText}>Toggle Random Text</button>
+        {isRdandomtext ? <RandomText/> : ''}
+      </div>
+    </Suspense>
   )
 }

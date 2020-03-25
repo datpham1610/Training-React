@@ -1,13 +1,18 @@
 import React, {lazy, Suspense} from 'react'
-import { Row, Col } from 'antd';
+import { Row, Col, Spin } from 'antd';
 import "antd/dist/antd.css";
 import { Switch, Route, useLocation } from 'react-router-dom'
+
 
 
 const Home = lazy(() => import('./containers/Home'))
 const PrivateRoute = lazy(() => import('./components/AuthButton'))
 const Login = lazy(() => import(('./components/ReExport')))
-const News = lazy(() => import('./containers/News'))
+const News = lazy(async () => {
+  await new Promise(resolve => setTimeout(resolve, 4000));
+  return import('./containers/News');
+});
+
 const AddTodo = lazy(() => import('./containers/AddTodo'))
 const Filter = lazy(()=>import('./containers/Filter'))
 const TodoList = lazy(()=>import('./components/TodoList')) 
@@ -21,7 +26,7 @@ const NotFound404 = () => {
 }
 
 const App = () => (
-  <Suspense fallback={<div>Loading....</div>}>
+  <Suspense fallback={<Spin/>}>
     <Switch>
       <Route exact path="/"><Home /></Route>
       <Route path="/login"><Login /></Route>
