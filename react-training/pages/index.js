@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import 'isomorphic-fetch'
+import fetch from 'isomorphic-unfetch'
+import Layout from '../componens/MyLayout'
 import Link from 'next/link'
 
 
@@ -7,25 +8,27 @@ export default class App extends Component {
   constructor(props){
     super(props)
   }
+
   static async getInitialProps(){
-    const res = await fetch('https://api.pokemontcg.io/v1/cards?pages=1&pageSize=12')
-    const data = res.json()
-    return data
+    const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+    const data = await res.json()
+    return {shows:data.map(value => value.show)}
   }
-  //Lúc này hàm getInitialProps sẽ chạy trước để lấy dữ liệu từ API 
+
   render() {
     return (
-      <div>
-        {this.props.cards.map((card,i)=>(
-          <div key = {i} style={{width:200, float:'left'}}>
-            <h4 >{card.name}</h4>
-            <Link href={`/cards?id=${card.id}`}>
-              <img src={card.imageUrl} style={{width:150}} />
-            </Link>
-          </div>
-        ))
-        }
-      </div>
+      <Layout>
+        <h1>Batman TV Shows</h1>
+        <ul>
+          {this.props.shows.map(show =>(
+            <li key={show.id}>
+              <Link href={`/show?id=${show.id}`} as={`/show/${show.id}`}>
+                <a>{show.name}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Layout>
     )
   }
 }
