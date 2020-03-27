@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import MainTasks from './containers/Main.js'
 import ThemeContext,{themes} from './components/theme-context'
 import ThemeButton from './components/theme-button'
+import ErrorBoundary from './components/ErrorBoundary'
+import Artists from './components/Artists'
+import FancyBtn from './components/FancyBtn'
 
 const Toolbar = props =>{
   return (
@@ -10,6 +13,9 @@ const Toolbar = props =>{
     </ThemeButton>
   )
 }
+
+const ref = React.createRef()
+
 class App extends Component {
   constructor(props){
     super(props)
@@ -36,15 +42,14 @@ class App extends Component {
       //   </div>
       // </div>
       <>
-        <ThemeContext.Provider value={this.state.theme}>
-            <Toolbar changTheme={this.toggleTheme} />
-        </ThemeContext.Provider>
-        <div>
-          <ThemeButton>w</ThemeButton>
-        </div>
+      <ErrorBoundary>
+        <FancyBtn ref={ref}>Click me</FancyBtn>
+      </ErrorBoundary>
       </>
     )
   }
 }
+
+
 
 export default App
