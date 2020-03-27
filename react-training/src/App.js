@@ -5,6 +5,8 @@ import ThemeButton from './components/theme-button'
 import ErrorBoundary from './components/ErrorBoundary'
 import Artists from './components/Artists'
 import FancyBtn from './components/FancyBtn'
+import MouseMove from './components/MouseMove'
+import CatMove from './components/CatMove'
 
 const Toolbar = props =>{
   return (
@@ -20,7 +22,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      theme:themes.light
+      theme:themes.light,
     }
   }
 
@@ -43,7 +45,11 @@ class App extends Component {
       // </div>
       <>
       <ErrorBoundary>
-        <FancyBtn ref={ref}>Click me</FancyBtn>
+          <div>
+            <MouseMove render={({ x, y }) => (
+              <CatMove mouse={{ x, y }} />
+            )}/>
+          </div>
       </ErrorBoundary>
       </>
     )
