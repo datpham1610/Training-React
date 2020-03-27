@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import MainTasks from './containers/Main.js'
-import ThemeContext,{themes} from './components/theme-context'
+import {themes} from './components/theme-context'
 import ThemeButton from './components/theme-button'
 import ErrorBoundary from './components/ErrorBoundary'
-import Artists from './components/Artists'
-import FancyBtn from './components/FancyBtn'
 import MouseMove from './components/MouseMove'
 import CatMove from './components/CatMove'
+import Panel from './components/Panel'
+import Movie from './components/Movie.js'
 
 const Toolbar = props =>{
   return (
@@ -46,6 +46,10 @@ class App extends Component {
       <>
       <ErrorBoundary>
           <div>
+            <Panel>
+              <Movie><div>Mad Max: Fury Road</div></Movie>
+              <Movie><div>Harry Potter & The Goblet Of Fire</div></Movie>
+            </Panel>
             <MouseMove render={({ x, y }) => (
               <CatMove mouse={{ x, y }} />
             )}/>
